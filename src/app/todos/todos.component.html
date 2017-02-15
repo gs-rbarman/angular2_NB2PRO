@@ -1,0 +1,16 @@
+<div>
+	<input class="task-name" [(ngModel)]="newTask" type="text" placeholder="Type in new task and press Enter key to add task" (keydown.enter)='addTask()'>
+</div>
+
+<h3>Do</h3>
+<div *ngFor="let task of tasks | tasksFilter:false">
+	<app-todo-item (task-updates)="updates($event)" [task]="task"></app-todo-item>
+	<!--event binding viz. 'task-updates' and calling a method viz. updates() on todos component -->
+</div>
+<div *ngIf="(tasks | tasksFilter:false).length===0">No tasks!</div>
+
+<h3>Done</h3>
+<div *ngFor="let task of tasks | tasksFilter:true">
+  <app-todo-item (task-updates)="updates($event)" [task]="task"></app-todo-item>
+</div>
+<div>{{(tasks | tasksFilter:false).length}} task(s) to do.</div>
